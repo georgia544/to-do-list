@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/tasks"
+        android:icon="@drawable/tasks_selector"
         android:title="Tasks"/>
 
     <item
         android:id="@+id/calendarFragment"
-        android:icon="@drawable/calendar"
+        android:icon="@drawable/calendar_selector"
         android:title="Calendar"/>
 
     <item
         android:id="@+id/mineFragment"
-        android:icon="@drawable/smile"
+        android:icon="@drawable/smile_selector"
         android:title="Mine"/>
 
 </menu>

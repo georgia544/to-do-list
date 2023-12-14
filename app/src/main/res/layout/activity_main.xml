@@ -29,8 +29,10 @@
        android:id="@+id/bottom_nav"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:background="tran"
        app:menu="@menu/menu_bottom_navigation"
        app:layout_constraintBottom_toBottomOf="parent"
        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

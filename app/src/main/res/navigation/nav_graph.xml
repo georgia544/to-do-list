@@ -17,4 +17,8 @@
         android:id="@+id/mineFragment"
         android:name="com.hfad.todolist.MineFragment"
         android:label="Mine" />
+    <fragment
+        android:id="@+id/starTasksFragment"
+        android:name="com.hfad.todolist.StarTasksFragment"
+        android:label="StarTasksFragment" />
 </navigation>
