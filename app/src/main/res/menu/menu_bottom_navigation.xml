@@ -4,7 +4,8 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/tasks_selector"
-        android:title="Tasks"/>
+        android:title="Tasks"
+        />
 
     <item
         android:id="@+id/calendarFragment"

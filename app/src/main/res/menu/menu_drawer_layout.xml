@@ -5,13 +5,10 @@
             android:id="@+id/starTasksFragment"
             android:icon="@drawable/star"
             android:title="Star Tasks"/>
-        <item
-            android:id="@+id/category"
-            android:icon="@drawable/category"
-            android:title="Category"/>
+
 
     </group>
 
-    <item/>
+
 
 </menu>

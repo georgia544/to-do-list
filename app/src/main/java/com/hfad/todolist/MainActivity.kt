@@ -2,37 +2,103 @@ package com.hfad.todolist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
-import androidx.navigation.findNavController
+import android.widget.ExpandableListView
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.hfad.todolist.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val techStackList: ArrayList<DrawerItem> = ArrayList()
+    lateinit var customListViewAdapter: CustomListViewAdapter
+    lateinit var expandableLV: ExpandableListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        setSupportActionBar(binding.toolbar)
+        binding.drawerButton.setOnClickListener {
+            binding.drawerLayout.openDrawer(Gravity.LEFT)
+        }
+
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-        val navController=navHostFragment.navController
+        val navController = navHostFragment.navController
         binding.bottomNav.setupWithNavController(navController)
 
 
+        val builder = AppBarConfiguration.Builder(navController.graph)
+        builder.setOpenableLayout(binding.drawerLayout)
+
+        NavigationUI.setupWithNavController(binding.navView, navController)
 
 
 
+
+        // initializing all variables with their ids on below line.
+        expandableLV = findViewById(R.id.idExpandableListView)
+
+        // on below licustomne initializing our adapter and setting this adapter to expandable list view.
+        customListViewAdapter = CustomListViewAdapter(techStackList)
+        expandableLV.setAdapter(customListViewAdapter)
+
+        // on below line creating an array list for first tech tack and passing it to our tech stack list with tech stack name
+        val lng1: ArrayList<String> = ArrayList()
+        lng1.add("Java")
+        lng1.add("Kotlin")
+        techStackList.add(DrawerItem("Android Development", lng1))
+
+        // on below line creating an array list for second tech tack and passing it to our tech stack list with tech stack name
+        val lng2: ArrayList<String> = ArrayList()
+        lng2.add("Objective c")
+        lng2.add("Swift")
+        techStackList.add(DrawerItem("IOS Development", lng2))
+
+        // on below line creating an array list for third tech tack and passing it to our tech stack list with tech stack name
+        val lng3: ArrayList<String> = ArrayList()
+        lng3.add("HTML")
+        lng3.add("CSS")
+        techStackList.add(DrawerItem("Web Development", lng3))
+
+        // on below line notifying adapter that data has changed.
+        customListViewAdapter.notifyDataSetChanged()
+
+        // on below line adding child click listener for expandable list view.
+        expandableLV.setOnChildClickListener(ExpandableListView.OnChildClickListener { parent, v, groupPosition, childPosition, id -> // get the group header
+            // on below line we are getting tech stack item from our tech stack list
+            val drawerItem: DrawerItem = techStackList.get(groupPosition)
+            // on below line we are getting our programming language item from tech stack item.
+            val programmingLanguageItem: String =
+                drawerItem.drawerItemList.get(childPosition)
+            // on below line we are displaying toast message
+//            Toast.makeText(
+//                baseContext,
+//                categoryItem.category + "/" + programmingLanguageItem,
+//                Toast.LENGTH_LONG
+//            ).show()
+            false
+        })
+
+        // on below line adding click listener for expandable list view.
+        expandableLV.setOnGroupClickListener(ExpandableListView.OnGroupClickListener { parent, v, groupPosition, id -> // get the group header
+            // on below line we are getting our tech stack item
+            val drawerItem: DrawerItem = techStackList.get(groupPosition)
+            // displaying toast message on below line.
+         //   Toast.makeText(baseContext, categoryItem.category, Toast.LENGTH_LONG).show()
+            false
+        })
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar,menu)
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
         return super.onCreateOptionsMenu(menu)
     }
-}
+
+    }
+
+
