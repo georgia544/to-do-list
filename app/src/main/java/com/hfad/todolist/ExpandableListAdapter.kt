@@ -5,37 +5,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.ImageView
 import android.widget.TextView
 
 
 // Creating a custom list view adapter on below line.
-class CustomListViewAdapter(
+class ExpandableListAdapter(
     // creating a list for our tech stack on below line and passing tech stack item to it.
-    private val drawerExpandableList: List<DrawerItem>,
+    private val drawerItemsList: List<DrawerItem>,
 ) : BaseExpandableListAdapter() {
 
     // on below line we have to return the size of group in our case is tech stack for programming languages
     override fun getGroupCount(): Int {
-        return drawerExpandableList.size
+        return drawerItemsList.size
     }
 
     // below method is use to return size of child list in our case is language list
     override fun getChildrenCount(groupPosition: Int): Int {
-        val itemsList = drawerExpandableList.get(groupPosition).drawerItemList
-        return itemsList.size
+        val expandableItemsList = drawerItemsList.get(groupPosition).expandableItems
+        return expandableItemsList.size
     }
 
     // on below line we are returning the group from our tech stack list.
     override fun getGroup(groupPosition: Int): Any {
-        return drawerExpandableList.get(groupPosition)
+        return drawerItemsList.get(groupPosition)
     }
 
     // below method is use to return the item for our child list
     override fun getChild(groupPosition: Int, childPosition: Int): Any {
         // on below line we are getting our programming language list from tech stack list
-        val drawerItemSubList = drawerExpandableList.get(groupPosition).drawerItemList
+        val expandableItemsList = drawerItemsList.get(groupPosition).expandableItems
         // on below line e are getting item from our programming language list which we are taking from tech stack list
-        return drawerItemSubList.get(childPosition)
+        return expandableItemsList.get(childPosition)
     }
 
     // below method is use to get group position
@@ -68,9 +69,11 @@ class CustomListViewAdapter(
         // on below line we are inflating our layout file for our tech stack item.
         val view = inflater.inflate(R.layout.drawer_item, null) as View
         // on below line we are creating and initializing variable for our tech stack tv.
-        val itemName: TextView = view.findViewById(R.id.drawerItem)
+        val itemName: TextView = view.findViewById(R.id.drawer_item_name)
+        val itemImage:ImageView = view.findViewById(R.id.drawer_item_image)
         // on below line we are setting text for our tech stack text view.
-        itemName.text = drawerItem.drawerItem
+        itemImage.setImageResource(drawerItem.headerItem.itemIcon)
+        itemName.text = drawerItem.headerItem.itemName
         // on below line returning the view.
         return view
     }
@@ -84,16 +87,20 @@ class CustomListViewAdapter(
         parent: ViewGroup?
     ): View {
         // on below line we are getting language from our group
-        val itemDrawer: String = getChild(groupPosition, childPosition) as String
+        val itemDrawer: Item = getChild(groupPosition, childPosition) as Item
         // on below line we are creating a variable for our inflater.
         val inflater =
             parent?.context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         // on below line we are inflating a layout file for programming language list item.
         val view = inflater.inflate(R.layout.drawer_expandable_item, null) as View
         // on below line we are creating and initializing our text view for programming language.
-        val expandableItem: TextView = view.findViewById(R.id.drawer_expandable_item)
+        val expandableItemImage:ImageView = view.findViewById(R.id.drawer_expandable_item_image)
+        val expandableItemName: TextView = view.findViewById(R.id.drawer_expandable_item_name)
+
         // on below line setting data for our text view.
-        expandableItem.text = itemDrawer
+        expandableItemImage.setImageResource(itemDrawer.itemIcon)
+        expandableItemName.text = itemDrawer.itemName
+
         // on below line returning the view.
         return view
     }

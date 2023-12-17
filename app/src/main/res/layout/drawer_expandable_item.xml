@@ -2,18 +2,29 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <ImageView
+        android:id="@+id/drawer_expandable_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/category"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
-        android:id="@+id/drawer_expandable_item"
+        android:id="@+id/drawer_expandable_item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:padding="4dp"
-        android:text="List Item"
+        android:text="list Item"
         android:textColor="#FF000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toEndOf="@id/drawer_expandable_item_image"
+        app:layout_constraintBottom_toBottomOf="@id/drawer_expandable_item_image"
+        app:layout_constraintTop_toTopOf="@id/drawer_expandable_item_image"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
