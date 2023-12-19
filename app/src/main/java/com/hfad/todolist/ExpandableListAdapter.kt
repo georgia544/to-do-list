@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isInvisible
 
 
 // Creating a custom list view adapter on below line.
@@ -70,10 +71,22 @@ class ExpandableListAdapter(
         val view = inflater.inflate(R.layout.drawer_item, null) as View
         // on below line we are creating and initializing variable for our tech stack tv.
         val itemName: TextView = view.findViewById(R.id.drawer_item_name)
-        val itemImage:ImageView = view.findViewById(R.id.drawer_item_image)
+        val itemImage: ImageView = view.findViewById(R.id.drawer_item_image)
         // on below line we are setting text for our tech stack text view.
         itemImage.setImageResource(drawerItem.headerItem.itemIcon)
         itemName.text = drawerItem.headerItem.itemName
+
+        if (drawerItem.isExpanded == false) {
+            view.findViewById<ImageView>(R.id.arrow)
+                .setImageResource(R.drawable.arrow_down)
+        } else {
+            view.findViewById<ImageView>(R.id.arrow)
+                .setImageResource(R.drawable.arrow_up)
+        }
+        view.findViewById<ImageView>(R.id.arrow)
+            .isInvisible = drawerItem.expandableItems.isEmpty()
+
+
         // on below line returning the view.
         return view
     }
@@ -94,7 +107,7 @@ class ExpandableListAdapter(
         // on below line we are inflating a layout file for programming language list item.
         val view = inflater.inflate(R.layout.drawer_expandable_item, null) as View
         // on below line we are creating and initializing our text view for programming language.
-        val expandableItemImage:ImageView = view.findViewById(R.id.drawer_expandable_item_image)
+        val expandableItemImage: ImageView = view.findViewById(R.id.drawer_expandable_item_image)
         val expandableItemName: TextView = view.findViewById(R.id.drawer_expandable_item_name)
 
         // on below line setting data for our text view.

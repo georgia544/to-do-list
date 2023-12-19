@@ -11,12 +11,13 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     tools:src="@drawable/category"
-    app:layout_constraintEnd_toStartOf="@id/drawer_item_name"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"/>
+    app:layout_constraintEnd_toStartOf="@id/drawer_item_name"
+    />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:id="@+id/drawer_item_name"
@@ -24,9 +25,21 @@
         android:text="Item"
         android:textColor="#FF000000"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/drawer_item_image"
         app:layout_constraintStart_toEndOf="@id/drawer_item_image"
         app:layout_constraintTop_toTopOf="@id/drawer_item_image"
+        app:layout_constraintBottom_toBottomOf="@id/drawer_item_image"
+
+        />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_down"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/drawer_item_name"
+        app:layout_constraintBottom_toBottomOf="@id/drawer_item_name"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

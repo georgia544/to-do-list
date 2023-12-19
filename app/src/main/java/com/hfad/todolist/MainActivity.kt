@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.widget.ExpandableListView
+import android.widget.ImageView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -61,9 +62,13 @@ class MainActivity : AppCompatActivity() {
 
         // on below line creating an array list for first tech tack and passing it to our tech stack list with tech stack name
         val lng1: ArrayList<Item> = ArrayList()
-        lng1.add(Item("Java",R.drawable.calendar))
-        lng1.add(Item("Kotlin",R.drawable.category))
-        drawerItems.add(DrawerItem(Item("Android Development",R.drawable.smile), lng1))
+        val lng2: ArrayList<Item> = ArrayList()
+        lng1.add(Item("All", R.drawable.baseline_folder))
+        lng1.add(Item("Work", R.drawable.work))
+        lng1.add(Item("Personal", R.drawable.personal))
+        lng1.add(Item("Birthday", R.drawable.cake))
+        drawerItems.add(DrawerItem(Item("Category", R.drawable.category), lng1))
+        drawerItems.add(DrawerItem(Item("Star Tasks", R.drawable.star), lng2))
 
         // on below line creating an array list for second tech tack and passing it to our tech stack list with tech stack name
 //        val lng2: ArrayList<String> = ArrayList()
@@ -87,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             // on below line we are getting our programming language item from tech stack item.
             val programmingLanguageItem: Item =
                 drawerItem.expandableItems.get(childPosition)
+
             // on below line we are displaying toast message
 //            Toast.makeText(
 //                baseContext,
@@ -101,17 +107,29 @@ class MainActivity : AppCompatActivity() {
             // on below line we are getting our tech stack item
             val drawerItem: DrawerItem = drawerItems.get(groupPosition)
             // displaying toast message on below line.
+            drawerItem.isExpanded = !drawerItem.isExpanded
+//            println(imageView.tag)
+//            println(imageView.tag)
+//            println(imageView.tag)
+//            println(imageView.tag)
+//            if(imageView.getTag()==R.drawable.arrow_up){
+//                imageView.setImageResource(R.drawable.arrow_down)
+//                imageView.tag=null
+//            } else {
+//               imageView.tag= R.drawable.arrow_up
+//           }
+
             //   Toast.makeText(baseContext, categoryItem.category, Toast.LENGTH_LONG).show()
             false
         })
 
 
-
     }
-        override fun onCreateOptionsMenu(menu: Menu): Boolean {
-            menuInflater.inflate(R.menu.menu_toolbar, menu)
-            return super.onCreateOptionsMenu(menu)
-        }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 }
 
 
