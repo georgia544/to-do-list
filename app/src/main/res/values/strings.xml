@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">To Do List</string>
+    <string-array name="settings_home">
+        <item>Manage Categories</item>
+        <item>Search</item>
+        <item>Sort by</item>
+    </string-array>
+
 </resources>

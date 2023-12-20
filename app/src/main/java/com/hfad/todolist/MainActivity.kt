@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.widget.ExpandableListView
-import android.widget.ImageView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -50,9 +49,7 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        })
 
-        binding.drawerButton.setOnClickListener {
-            binding.drawerLayout.openDrawer(Gravity.LEFT)
-        }
+
         // initializing all variables with their ids on below line.
         expandableLV = findViewById(R.id.idExpandableListView)
 
@@ -61,26 +58,29 @@ class MainActivity : AppCompatActivity() {
         expandableLV.setAdapter(expandableListAdapter)
 
         // on below line creating an array list for first tech tack and passing it to our tech stack list with tech stack name
-        val lng1: ArrayList<Item> = ArrayList()
-        val lng2: ArrayList<Item> = ArrayList()
-        lng1.add(Item("All", R.drawable.baseline_folder))
-        lng1.add(Item("Work", R.drawable.work))
-        lng1.add(Item("Personal", R.drawable.personal))
-        lng1.add(Item("Birthday", R.drawable.cake))
-        drawerItems.add(DrawerItem(Item("Category", R.drawable.category), lng1))
-        drawerItems.add(DrawerItem(Item("Star Tasks", R.drawable.star), lng2))
+        val starTasks: ArrayList<Item> = ArrayList()
+        drawerItems.add(DrawerItem(Item("Star Tasks", R.drawable.star), starTasks))
+        val category: ArrayList<Item> = ArrayList()
+        category.add(Item("All", R.drawable.baseline_folder))
+        category.add(Item("Work", R.drawable.work))
+        category.add(Item("Personal", R.drawable.personal))
+        category.add(Item("Birthday", R.drawable.cake))
+        category.add(Item("Create New", R.drawable.add))
+        drawerItems.add(DrawerItem(Item("Category", R.drawable.category), category))
 
-        // on below line creating an array list for second tech tack and passing it to our tech stack list with tech stack name
-//        val lng2: ArrayList<String> = ArrayList()
-//        lng2.add("Objective c")
-//        lng2.add("Swift")
-//        drawerItems.add(DrawerItem("IOS Development", lng2))
-//
-//        // on below line creating an array list for third tech tack and passing it to our tech stack list with tech stack name
-//        val lng3: ArrayList<String> = ArrayList()
-//        lng3.add("HTML")
-//        lng3.add("CSS")
-//        drawerItems.add(DrawerItem("Web Development", lng3))
+        val theme: ArrayList<Item> = ArrayList()
+        drawerItems.add(DrawerItem(Item("Theme", R.drawable.theme), theme))
+
+        val faq: ArrayList<Item> = ArrayList()
+        drawerItems.add(DrawerItem(Item("FAQ", R.drawable.faq), faq))
+
+        val settings: ArrayList<Item> = ArrayList()
+        drawerItems.add(DrawerItem(Item("Settings", R.drawable.settings), settings))
+
+
+
+
+
 
         // on below line notifying adapter that data has changed.
         expandableListAdapter.notifyDataSetChanged()
@@ -108,21 +108,17 @@ class MainActivity : AppCompatActivity() {
             val drawerItem: DrawerItem = drawerItems.get(groupPosition)
             // displaying toast message on below line.
             drawerItem.isExpanded = !drawerItem.isExpanded
-//            println(imageView.tag)
-//            println(imageView.tag)
-//            println(imageView.tag)
-//            println(imageView.tag)
-//            if(imageView.getTag()==R.drawable.arrow_up){
-//                imageView.setImageResource(R.drawable.arrow_down)
-//                imageView.tag=null
-//            } else {
-//               imageView.tag= R.drawable.arrow_up
-//           }
+
 
             //   Toast.makeText(baseContext, categoryItem.category, Toast.LENGTH_LONG).show()
             false
         })
 
+
+    }
+    fun openDrawerMenu() {
+
+        binding.drawerLayout.openDrawer(Gravity.LEFT)
 
     }
 
