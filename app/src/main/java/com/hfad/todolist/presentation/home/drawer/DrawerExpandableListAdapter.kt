@@ -1,4 +1,4 @@
-package com.hfad.todolist
+package com.hfad.todolist.presentation.home.drawer
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,34 +8,35 @@ import android.widget.BaseExpandableListAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isInvisible
+import com.hfad.todolist.R
 
 
 // Creating a custom list view adapter on below line.
-class ExpandableListAdapter(
+class DrawerExpandableListAdapter(
     // creating a list for our tech stack on below line and passing tech stack item to it.
-    private val drawerItemsList: List<DrawerItem>,
+    private val drawerHeaderItemsList: List<DrawerHeaderItem>,
 ) : BaseExpandableListAdapter() {
 
     // on below line we have to return the size of group in our case is tech stack for programming languages
     override fun getGroupCount(): Int {
-        return drawerItemsList.size
+        return drawerHeaderItemsList.size
     }
 
     // below method is use to return size of child list in our case is language list
     override fun getChildrenCount(groupPosition: Int): Int {
-        val expandableItemsList = drawerItemsList.get(groupPosition).expandableItems
+        val expandableItemsList = drawerHeaderItemsList.get(groupPosition).expandableDrawerInnerItems
         return expandableItemsList.size
     }
 
     // on below line we are returning the group from our tech stack list.
     override fun getGroup(groupPosition: Int): Any {
-        return drawerItemsList.get(groupPosition)
+        return drawerHeaderItemsList.get(groupPosition)
     }
 
     // below method is use to return the item for our child list
     override fun getChild(groupPosition: Int, childPosition: Int): Any {
         // on below line we are getting our programming language list from tech stack list
-        val expandableItemsList = drawerItemsList.get(groupPosition).expandableItems
+        val expandableItemsList = drawerHeaderItemsList.get(groupPosition).expandableDrawerInnerItems
         // on below line e are getting item from our programming language list which we are taking from tech stack list
         return expandableItemsList.get(childPosition)
     }
@@ -63,7 +64,7 @@ class ExpandableListAdapter(
         parent: ViewGroup?
     ): View {
         // on below line we are getting our group from tech stack item
-        val drawerItem: DrawerItem = getGroup(groupPosition) as DrawerItem
+        val drawerHeaderItem: DrawerHeaderItem = getGroup(groupPosition) as DrawerHeaderItem
         // on below line we are creating a layout inflater variable to inflate our layout file.
         val inflater =
             parent!!.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -73,10 +74,10 @@ class ExpandableListAdapter(
         val itemName: TextView = view.findViewById(R.id.drawer_item_name)
         val itemImage: ImageView = view.findViewById(R.id.drawer_item_image)
         // on below line we are setting text for our tech stack text view.
-        itemImage.setImageResource(drawerItem.headerItem.itemIcon)
-        itemName.text = drawerItem.headerItem.itemName
+        itemImage.setImageResource(drawerHeaderItem.headerDrawerInnerItem.icon)
+        itemName.text = drawerHeaderItem.headerDrawerInnerItem.name
 
-        if (drawerItem.isExpanded == false) {
+        if (drawerHeaderItem.isExpanded == false) {
             view.findViewById<ImageView>(R.id.arrow)
                 .setImageResource(R.drawable.arrow_down)
         } else {
@@ -84,7 +85,7 @@ class ExpandableListAdapter(
                 .setImageResource(R.drawable.arrow_up)
         }
         view.findViewById<ImageView>(R.id.arrow)
-            .isInvisible = drawerItem.expandableItems.isEmpty()
+            .isInvisible = drawerHeaderItem.expandableDrawerInnerItems.isEmpty()
 
 
         // on below line returning the view.
@@ -100,7 +101,7 @@ class ExpandableListAdapter(
         parent: ViewGroup?
     ): View {
         // on below line we are getting language from our group
-        val itemDrawer: Item = getChild(groupPosition, childPosition) as Item
+        val drawerInnerItemDrawer: DrawerInnerItem = getChild(groupPosition, childPosition) as DrawerInnerItem
         // on below line we are creating a variable for our inflater.
         val inflater =
             parent?.context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -111,8 +112,8 @@ class ExpandableListAdapter(
         val expandableItemName: TextView = view.findViewById(R.id.drawer_expandable_item_name)
 
         // on below line setting data for our text view.
-        expandableItemImage.setImageResource(itemDrawer.itemIcon)
-        expandableItemName.text = itemDrawer.itemName
+        expandableItemImage.setImageResource(drawerInnerItemDrawer.icon)
+        expandableItemName.text = drawerInnerItemDrawer.name
 
         // on below line returning the view.
         return view

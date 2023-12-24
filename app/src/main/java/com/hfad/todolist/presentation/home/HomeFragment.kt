@@ -1,17 +1,21 @@
-package com.hfad.todolist
+package com.hfad.todolist.presentation.home
 
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.hfad.todolist.presentation.MainActivity
+import com.hfad.todolist.R
 import com.hfad.todolist.databinding.FragmentHomeBinding
 
-class HomeFragment:Fragment() {
+class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    val viewModel: HomeViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -22,19 +26,24 @@ class HomeFragment:Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        viewModel.init()
+
+        viewModel.homeState.observe(viewLifecycleOwner, Observer { homeState ->
+           binding.homeFragmentTextView.text=  homeState.toString()
+        })
+
         binding.settingsHome.setOnClickListener {
-            val popupMenu= PopupMenu(context, binding.settingsHome)
+            val popupMenu = PopupMenu(context, binding.settingsHome)
             popupMenu.menuInflater.inflate(R.menu.menu_settings_home, popupMenu.menu)
             popupMenu.show()
         }
 
 
-            binding.drawerButton.setOnClickListener {
-    (activity as MainActivity?)?.openDrawerMenu()
-}
+        binding.drawerButton.setOnClickListener {
+            (activity as MainActivity?)?.openDrawerMenu()
+        }
         return view
     }
-
 
 
     override fun onDestroyView() {

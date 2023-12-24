@@ -6,19 +6,19 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.hfad.todolist.HomeFragment"
+        android:name="com.hfad.todolist.presentation.home.HomeFragment"
         android:label="Tasks"
         />
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.hfad.todolist.CalendarFragment"
+        android:name="com.hfad.todolist.presentation.calendar.CalendarFragment"
         android:label="Calendar" />
     <fragment
         android:id="@+id/mineFragment"
-        android:name="com.hfad.todolist.MineFragment"
+        android:name="com.hfad.todolist.presentation.mine.MineFragment"
         android:label="Mine" />
     <fragment
         android:id="@+id/starTasksFragment"
-        android:name="com.hfad.todolist.StarTasksFragment"
+        android:name="com.hfad.todolist.presentation.starTasks.StarTasksFragment"
         android:label="StarTasksFragment" />
 </navigation>

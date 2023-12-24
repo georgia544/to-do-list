@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
 
     id("com.google.devtools.ksp")
+    id("kotlin-kapt")
+
 }
 
 android {
@@ -46,11 +48,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.room:room-runtime:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     ksp("androidx.room:room-compiler:2.6.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
+    implementation ("androidx.fragment:fragment-ktx:1.1.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
