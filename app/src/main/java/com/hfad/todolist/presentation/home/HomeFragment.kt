@@ -8,6 +8,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.hfad.todolist.presentation.MainActivity
 import com.hfad.todolist.R
 import com.hfad.todolist.databinding.FragmentHomeBinding
@@ -26,11 +27,26 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        viewModel.init()
 
-        viewModel.homeState.observe(viewLifecycleOwner, Observer { homeState ->
-           binding.homeFragmentTextView.text=  homeState.toString()
-        })
+
+        val dataset = arrayOf(HomeCategoryItem(5551L,"fjkc"),
+            HomeCategoryItem(45351L,"lol"),
+            HomeCategoryItem(451L,"lmao"),
+            HomeCategoryItem(451L,"lmao"),
+            HomeCategoryItem(451L,"lmao"),
+            HomeCategoryItem(451L,"lmao"))
+
+        val customAdapter = HomeCategoriesAdapter(dataset)
+
+
+        binding.categoriesRecyclerView.adapter = customAdapter
+
+        val dataTasks = arrayOf(HomeTaskItem(564L,"sdsds",54854L,true),
+            HomeTaskItem(564L,"sdsds",54854L,true),
+            HomeTaskItem(564L,"sdsds",54854L,true))
+
+        val adapterTasks = HomeTasksAdapter(dataTasks)
+        binding.tasksRecyclerView.adapter = adapterTasks
 
         binding.settingsHome.setOnClickListener {
             val popupMenu = PopupMenu(context, binding.settingsHome)
